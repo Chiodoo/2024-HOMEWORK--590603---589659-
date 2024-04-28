@@ -1,6 +1,14 @@
 package it.uniroma3.diadia;
 import java.util.Scanner;
-public class IOConsole {
+
+/**
+ *Classe che gestisce l'input e l'output in tutto il DiaDia
+ *
+ * @author  Marco Chiodo & Carmine Adduce
+ *          
+ * @version 1.0
+ */
+public class IOConsole implements IO{
 	
 	public void mostraMessaggio(String msg) {
 		System.out.println(msg);

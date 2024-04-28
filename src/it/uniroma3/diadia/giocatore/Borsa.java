@@ -36,6 +36,9 @@ public class Borsa {
 	 * @return ritorna un valore booleano che è true se l'oggetto è stato inserito, false altrimenti
 	 * */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
+		if(attrezzo==null)
+			return false;
+		
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
 
@@ -132,13 +135,13 @@ public class Borsa {
 	 * */
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		if (!this.isEmpty()) {
+		if (this.isEmpty()) {
+			s.append("Borsa vuota");
 		} else
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
 		for (int i= 0; i<this.attrezzi.length; i++)
 			if(this.attrezzi[i]!=null)
 				s.append(attrezzi[i].toString()+" ");
-		s.append("Borsa vuota");
 		return s.toString();
 	}
 }
