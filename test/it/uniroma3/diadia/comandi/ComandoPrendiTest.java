@@ -7,30 +7,33 @@ import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 
 
 public class ComandoPrendiTest {
 	private Partita partita;
-	private Labirinto labirinto;
+	private Labirinto monolocale;
 	private ComandoPrendi comandoPrendi;
-	private Attrezzo pesante;
 	
 	
 	@Before
 	public void setUp() {
-		this.labirinto = new Labirinto();
-		this.partita = new Partita(labirinto);
+		this.monolocale = new LabirintoBuilder()
+				.addStanzaIniziale("Inizio")
+				.addAttrezzo("Attrezzo", 0)
+				.addAttrezzo("Pesante", 1000)
+				.addStanzaVincente("Finale")
+				.getLabirinto();
+		this.partita = new Partita(monolocale);
 		this.comandoPrendi = new ComandoPrendi();
-		this.pesante = new Attrezzo("Pesante", 1000);
-		this.partita.getStanzaCorrente().addAttrezzo(pesante);
 	}
 	
 	@Test
 	public void testComandoPrendi_InserimentoApprovato() {
-		this.comandoPrendi.setParametro("osso");
+		this.comandoPrendi.setParametro("Attrezzo");
 		this.comandoPrendi.esegui(partita);
-		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo("osso"));
+		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo("Attrezzo"));
 	}
 	
 	@Test

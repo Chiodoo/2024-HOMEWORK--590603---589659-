@@ -23,12 +23,9 @@ public class ComandoPosa implements Comando {
 
 		Attrezzo attrezzo;
 		attrezzo=partita.getGiocatore().getBorsa().getAttrezzo(this.parametro);
-		if(partita.getStanzaCorrente().addAttrezzo(attrezzo)) {			//Controllo che posso aggiungere l'attrezzo
-			partita.getGiocatore().getBorsa().removeAttrezzo(this.parametro);
-			ioConsole.mostraMessaggio("Hai posato l'attrezzo");
-		}else {
-			this.ioConsole.mostraMessaggio("La stanza non può contenere più attrezzi!");
-		}
+		partita.getStanzaCorrente().addAttrezzo(attrezzo); 			//Controllo che posso aggiungere l'attrezzo
+		partita.getGiocatore().getBorsa().removeAttrezzo(this.parametro);
+		ioConsole.mostraMessaggio("Hai posato l'attrezzo");
 	}
 
 	@Override

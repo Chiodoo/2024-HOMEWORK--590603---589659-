@@ -39,8 +39,13 @@ class StanzaMagica extends Stanza {
 		int pesoX2 = attrezzo.getPeso() * 2;
 		nomeInvertito = new StringBuilder(attrezzo.getNome());
 		nomeInvertito = nomeInvertito.reverse();
-		attrezzo = new Attrezzo(nomeInvertito.toString(),
-				pesoX2);
+		attrezzo = new Attrezzo(nomeInvertito.toString(),pesoX2);
 		return attrezzo;
+	}
+
+	
+	@Override
+	public boolean isMagica() {
+		return true;
 	}
 }

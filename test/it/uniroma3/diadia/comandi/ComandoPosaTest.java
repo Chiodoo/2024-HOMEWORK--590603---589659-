@@ -7,53 +7,49 @@ import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
 public class ComandoPosaTest {
-	private Partita partitaStanzaVuota;
-	private Partita partitaStanzaPiena;
-	private Labirinto labirintoStanzaVuota;
-	private Labirinto labirintoStanzaPiena;
+	private Partita partita;
+	private Labirinto monolocale;
 	private ComandoPosa comandoPosa;
-	private Attrezzo attrezzo;
-	private Attrezzo attrezzoRifiutato;
 
 	@Before
 	public void setUp() {
-		this.labirintoStanzaVuota = new Labirinto();
-		this.partitaStanzaVuota = new Partita(labirintoStanzaVuota);
+		this.monolocale = new LabirintoBuilder()
+				.addStanzaIniziale("Inizio")
+				.addStanzaVincente("Finale")
+				.getLabirinto();
+		
+		this.partita = new Partita(monolocale);
 		this.comandoPosa = new ComandoPosa();
-		this.attrezzo = new Attrezzo("Attrezzo", 0);
-		this.partitaStanzaVuota.getGiocatore().getBorsa().addAttrezzo(attrezzo);
-
-		this.attrezzoRifiutato = new Attrezzo("Rifiutato", 0);
-		this.labirintoStanzaPiena = new Labirinto();
-		this.partitaStanzaPiena = new Partita(this.labirintoStanzaPiena);
-		for(int i=0;i<10;i++) 
-			this.partitaStanzaPiena.getStanzaCorrente().addAttrezzo(attrezzo);
-		this.partitaStanzaPiena.getGiocatore().getBorsa().addAttrezzo(attrezzoRifiutato);
-
+		this.partita.getGiocatore().getBorsa().addAttrezzo(new Attrezzo("Attrezzo", 0));
 	}
 
 	@Test
 	public void testComandoPosa_InserimentoApprovato_AttrezzoPosato(){
 		this.comandoPosa.setParametro("Attrezzo");
-		this.comandoPosa.esegui(partitaStanzaVuota);
-		assertTrue(this.partitaStanzaVuota.getStanzaCorrente().hasAttrezzo("Attrezzo"));
+		this.comandoPosa.esegui(partita);
+		assertTrue(this.partita.getStanzaCorrente().hasAttrezzo("Attrezzo"));
 	}
 
 	@Test
 	public void testComandoPosa_AttrezzoInesistente() {
 		this.comandoPosa.setParametro("Inesistente");
-		this.comandoPosa.esegui(partitaStanzaVuota);
-		assertFalse(this.partitaStanzaVuota.getStanzaCorrente().hasAttrezzo("Inesistente"));
+		this.comandoPosa.esegui(this.partita);
+		assertFalse(this.partita.getStanzaCorrente().hasAttrezzo("Inesistente"));
 	}
 
+	/*
+	 * Test inutile a livello del diaDia ma utile al livello didattico, in quanto
+	 * supponiamo che non ci sono due attrezzi con lo stesso nome nel labirinto
 	@Test
-	public void testComandoPosa_InserimentoRifiutato() {
-		this.comandoPosa.setParametro("Rifiutato");
-		this.comandoPosa.esegui(partitaStanzaPiena);
-		assertFalse(this.partitaStanzaPiena.getStanzaCorrente().hasAttrezzo("Rifiutato"));
-	}
+	public void testComandoPosa_InserimentoAggiornato() {
+		this.comandoPosa.setParametro("Attrezzo");
+		this.comandoPosa.esegui(partitaStanzaConAttrezzo);
+		assertEquals(this.partitaStanzaConAttrezzo.getStanzaCorrente().getAttrezzo("Attrezzo"),this.attrezzoStessoNome);
+		assertNotEquals(this.partitaStanzaConAttrezzo.getStanzaCorrente().getAttrezzo("Attrezzo"),this.attrezzo);
+	}*/
 }

@@ -11,9 +11,14 @@ public class LabirintoTest {
 	
 	@Before
 	public void setUp() {
-		this.labirinto = new Labirinto();
-		this.stanzaVincente = new Stanza("Biblioteca");
-		this.stanzaIniziale = new Stanza("Atrio");
+		this.labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Inizio")
+				.addStanzaVincente("Fine")
+				.addAdiacenza("Inizio","Fine","Nord")
+				.getLabirinto();
+		
+		this.stanzaIniziale = new Stanza("Inizio");
+		this.stanzaVincente = new Stanza("Fine");
 		
 	}
 	

@@ -11,7 +11,7 @@ public class ComandoNonValido implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		this.ioConsole = new IOConsole();
-		ioConsole.mostraMessaggio("Comando"+this.parametro+"non valido");
+		ioConsole.mostraMessaggio("Comando non valido");
 	}
 
 	@Override
