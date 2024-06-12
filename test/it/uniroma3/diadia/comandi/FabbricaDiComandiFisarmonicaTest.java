@@ -58,8 +58,8 @@ public class FabbricaDiComandiFisarmonicaTest {
 	
 	@Test
 	public void testComandoVai() {
-		this.comando=this.fabbricaDiComandiFisarmonica.costruisciComando("vai direzione");
+		this.comando=this.fabbricaDiComandiFisarmonica.costruisciComando("vai nord");
 		assertEquals(comando.getNome(),"vai");
-		assertEquals(comando.getParametro(),"direzione");
+		assertEquals(comando.getParametro(),"nord");
 	}
 }

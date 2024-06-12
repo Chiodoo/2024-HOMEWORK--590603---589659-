@@ -14,7 +14,7 @@ public class LabirintoTest {
 		this.labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("Inizio")
 				.addStanzaVincente("Fine")
-				.addAdiacenza("Inizio","Fine","Nord")
+				.addAdiacenza("Inizio","Fine",Direzione.nord)
 				.getLabirinto();
 		
 		this.stanzaIniziale = new Stanza("Inizio");

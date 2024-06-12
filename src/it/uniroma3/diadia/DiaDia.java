@@ -3,11 +3,13 @@ package it.uniroma3.diadia;
 
 
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -45,7 +47,7 @@ public class DiaDia{
 		this.partita = new Partita(this.labirinto);
 		this.ioConsole = io;
 	}
-	
+
 	public DiaDia(Labirinto labirinto,IO io) {
 		this.labirinto = labirinto;
 		this.partita = new Partita(labirinto);
@@ -66,10 +68,11 @@ public class DiaDia{
 	 * Processa una istruzione 
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @throws Exception 
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
@@ -83,14 +86,33 @@ public class DiaDia{
 	}   
 
 	public static void main(String[] argc) {
-		IO io = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		IO io = new IOConsole(scanner);
+		/*
 		Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("LabCampusOne")
 				.addStanzaVincente("Biblioteca")
 				.addAdiacenza("LabCampusOne","Biblioteca","ovest")
-				.getLabirinto();
-				DiaDia gioco = new DiaDia(labirinto, io);
+				.getLabirinto();*/
+		Labirinto labirinto = null;
+		try {
+			labirinto = Labirinto.newBuilder("LabirintoDesktop.txt").getLabirinto();		
+		} catch (FileNotFoundException | FormatoFileNonValidoException e) {
+			e.printStackTrace();
+		}
+		DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
+
+		//		Properties prop= new Properties();
+		//		
+		//		prop.setProperty("cfu_max", "20");
+		//		try {
+		//			prop.store(new FileWriter(new File("properties")), "Configurazione DiaDia");
+		//		} catch (IOException e) {
+		//			e.printStackTrace();
+		//		}
+		//		
+		scanner.close();
 	}
 
 

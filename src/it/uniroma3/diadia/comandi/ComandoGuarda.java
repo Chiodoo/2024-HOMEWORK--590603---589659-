@@ -4,7 +4,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando {
 	private IO ioConsole;
 	@Override
 	public void esegui(Partita partita) {
@@ -15,10 +15,6 @@ public class ComandoGuarda implements Comando {
 				+partita.getGiocatore().getCfu()+" CFU");
 		ioConsole.mostraMessaggio("Informazioni sulla borsa del giocatore:\n"
 				+partita.getGiocatore().getBorsa());
-	}
-
-	@Override
-	public void setParametro(String parametro) {
 	}
 
 	@Override

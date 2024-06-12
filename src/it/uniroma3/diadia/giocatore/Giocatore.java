@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.CaricatoreProperties;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -13,7 +14,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * */
 public class Giocatore {
 	
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = CaricatoreProperties.get("cfu_max");
 	
 	private int cfu;
 	private Borsa borsa;

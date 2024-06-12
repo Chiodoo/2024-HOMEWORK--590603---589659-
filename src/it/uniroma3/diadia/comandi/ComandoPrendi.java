@@ -5,8 +5,7 @@ import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando {
-	private String parametro;
+public class ComandoPrendi extends AbstractComando {
 	private IO ioConsole;
 	/**
 	 * Metodo che rimuove un attrezzo dalla stanza e lo mette nella borsa 
@@ -31,18 +30,7 @@ public class ComandoPrendi implements Comando {
 	}
 
 	@Override
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
-	}
-
-	@Override
 	public String getNome() {
 		return "prendi";
 	}
-
-	@Override
-	public String getParametro() {
-		return this.parametro;
-	}
-
 }

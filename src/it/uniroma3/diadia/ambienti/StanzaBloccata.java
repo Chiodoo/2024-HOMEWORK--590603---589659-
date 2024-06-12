@@ -12,17 +12,17 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class StanzaBloccata extends Stanza{
 	
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
 	private String sbloccaStanza;
 	
-	public StanzaBloccata(String nome,String direzioneBloccata,String sbloccaStanza) {
+	public StanzaBloccata(String nome,Direzione direzioneBloccata,String sbloccaStanza) {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
 		this.sbloccaStanza = sbloccaStanza;
 	}
 	
 	@Override
-	public Stanza getStanzaAdiacente(String dir) {
+	public Stanza getStanzaAdiacente(Direzione dir) {
 		if(dir == this.direzioneBloccata) {
 			if(this.hasAttrezzo(this.sbloccaStanza))
 				super.getStanzaAdiacente(dir);

@@ -15,20 +15,20 @@ public class StanzaBloccataTest {
 	
 	@Before
 	public void setUp() {
-		this.bloccata = new StanzaBloccata("Bloccata", "nord", "Chiave");
-		this.nonBloccata = new StanzaBloccata("Sbloccata","nord", "Chiave");
+		this.bloccata = new StanzaBloccata("Bloccata", Direzione.nord, "Chiave");
+		this.nonBloccata = new StanzaBloccata("Sbloccata",Direzione.nord, "Chiave");
 		this.sblocca = new Attrezzo("Chiave", 0);
 		this.nonBloccata.addAttrezzo(sblocca);
-		this.nonBloccata.impostaStanzaAdiacente("nord", bloccata);
+		this.nonBloccata.impostaStanzaAdiacente(Direzione.nord, bloccata);
 	}
 	
 	@Test
 	public void testGetStanzaAdiacenteStanzaBloccata_Bloccata() {
-		assertEquals(this.bloccata,this.bloccata.getStanzaAdiacente("nord"));
+		assertEquals(this.bloccata,this.bloccata.getStanzaAdiacente(Direzione.nord));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacenteStanzaBloccata_NonBloccata() {
-		assertEquals(this.nonBloccata.getStanzaAdiacente("nord"),this.bloccata);
+		assertEquals(this.nonBloccata.getStanzaAdiacente(Direzione.nord),this.bloccata);
 	}
 }
